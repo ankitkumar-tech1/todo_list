@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Connect to DB (done here for serverless; handles cold starts)
+// Connect to DB (handles serverless cold starts)
 connectDB();
 
 export default app;
