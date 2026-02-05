@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// 🔍 DEBUG LINE (YAHI ADD KARO)
+console.log("API URL =", import.meta.env.VITE_API_URL);
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   headers: {
@@ -8,7 +11,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('flowtasks_token'); // ✅ FIXED
+  const token = localStorage.getItem('flowtasks_token');
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
