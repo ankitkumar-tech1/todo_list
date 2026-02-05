@@ -16,21 +16,26 @@ const app = express();
  * Ye main Express app setup hai - middleware, routes, error handling sab yahan hai.
  */
 
-// 🔥 CORS FIX (IMPORTANT)
+// 🔥 FINAL CORS CONFIG (PRODUCTION SAFE)
 app.use(cors({
   origin: [
-    process.env.CLIENT_URL,           // Render env
-    'https://flowtask-eta.vercel.app', // Vercel production
-    'http://localhost:5173'            // Local dev
+    process.env.CLIENT_URL,                     // Render env
+    'https://flowtask-eta.vercel.app',           // Vercel main domain
+    'https://flowtask-ageuq4rfc-ankitkumar2431967-1032s-projects.vercel.app', // Vercel preview
+    'http://localhost:5173'                      // Local dev
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
 
-app.use(express.json()); // JSON body parser
-app.use(express.urlencoded({ extended: true })); // URL-encoded body parser
+// 🔴 PRE-FLIGHT (OPTIONS) FIX — THIS WAS MISSING
+app.options('*', cors());
 
-// ✅ ROOT ROUTE (debug / health)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// ✅ ROOT ROUTE (debug)
 app.get('/', (req, res) => {
   res.json({
     success: true,
@@ -42,7 +47,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
-// Health check route (testing ke liye)
+// Health check route
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
@@ -51,7 +56,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 404 handler (agar koi route match nahi hua)
+// 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
@@ -59,7 +64,7 @@ app.use('*', (req, res) => {
   });
 });
 
-// Error handler middleware (last mein - saare errors yahan handle honge)
+// Error handler (last)
 app.use(errorHandler);
 
 export default app;
