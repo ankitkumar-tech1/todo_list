@@ -16,13 +16,27 @@ const app = express();
  * Ye main Express app setup hai - middleware, routes, error handling sab yahan hai.
  */
 
-// Middleware
+// 🔥 CORS FIX (IMPORTANT)
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    process.env.CLIENT_URL,           // Render env
+    'https://flowtask-eta.vercel.app', // Vercel production
+    'http://localhost:5173'            // Local dev
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
+
 app.use(express.json()); // JSON body parser
 app.use(express.urlencoded({ extended: true })); // URL-encoded body parser
+
+// ✅ ROOT ROUTE (debug / health)
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend is running 🚀',
+  });
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
