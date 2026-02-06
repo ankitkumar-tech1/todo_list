@@ -4,20 +4,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-/**
- * Server Entry Point
- * 
- * Ye file sirf server start karti hai
- * (DB connect + app.listen)
- */
-
-const PORT = process.env.PORT || 5000;
-
-// MongoDB connect karo
 connectDB();
 
-// Server start karo
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server running on ${PORT}`);
 });
