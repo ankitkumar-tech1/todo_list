@@ -5,49 +5,38 @@ import authRoutes from './routes/authRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
 
 /**
  * Express App Configuration
- * 
- * Ye main Express app setup hai - middleware, routes, error handling sab yahan hai.
  */
 
-// 🔥 FINAL CORS CONFIG (PRODUCTION SAFE)
+// ✅ FINAL CORS CONFIG (MOST IMPORTANT)
 app.use(cors({
   origin: [
-    process.env.CLIENT_URL,                     // Render env
-    'https://flowtask-eta.vercel.app',           // Vercel main domain
-    'https://flowtask-ageuq4rfc-ankitkumar2431967-1032s-projects.vercel.app', // Vercel preview
-    'http://localhost:5173'                      // Local dev
-  ],
+    process.env.CLIENT_URL,
+    'https://flowtask-eta.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+  ].filter(Boolean),
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  credentials: true
 }));
 
-// 🔴 PRE-FLIGHT (OPTIONS) FIX — THIS WAS MISSING
+// ✅ PRE-FLIGHT FIX (THIS WAS MISSING)
 app.options('*', cors());
 
+// Body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// ✅ ROOT ROUTE (debug)
-app.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Backend is running 🚀',
-  });
-});
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 
-// Health check route
+// Health check
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
@@ -64,7 +53,7 @@ app.use('*', (req, res) => {
   });
 });
 
-// Error handler (last)
+// Error handler
 app.use(errorHandler);
 
 export default app;
