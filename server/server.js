@@ -7,7 +7,8 @@ dotenv.config();
 /**
  * Server Entry Point
  * 
- * Ye file server start karti hai - MongoDB connect karke Express server listen karti hai.
+ * Ye file sirf server start karti hai
+ * (DB connect + app.listen)
  */
 
 const PORT = process.env.PORT || 5000;
