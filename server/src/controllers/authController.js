@@ -45,6 +45,7 @@ export const registerUser = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         token,
       },
     });
@@ -100,6 +101,7 @@ export const loginUser = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         token,
       },
     });
@@ -124,6 +126,7 @@ export const getProfile = async (req, res, next) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
         createdAt: user.createdAt,
       },
     });

@@ -31,6 +31,11 @@ const userSchema = mongoose.Schema(
       minlength: [6, 'Password must be at least 6 characters'],
       select: false, // Password by default query mein nahi aayega (security)
     },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
   },
   {
     timestamps: true, // createdAt aur updatedAt automatically add hoga

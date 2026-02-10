@@ -2,26 +2,29 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext({
   theme: 'dark',
-  toggleTheme: () => {}
+  toggleTheme: () => { }
 });
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark');
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem('flowtasks-theme');
-    if (stored === 'light' || stored === 'dark') {
-      setTheme(stored);
-      document.documentElement.classList.toggle('dark', stored === 'dark');
-    } else {
-      document.documentElement.classList.add('dark');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = window.localStorage.getItem('flowtasks-theme');
+      if (stored === 'light' || stored === 'dark') {
+        return stored;
+      }
     }
-  }, []);
+    return 'dark';
+  });
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    const root = window.document.documentElement;
+    console.log('Theme changed to:', theme); // Debug log
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
     window.localStorage.setItem('flowtasks-theme', theme);
   }, [theme]);
+
+
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));

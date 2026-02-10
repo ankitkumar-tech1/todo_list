@@ -28,7 +28,7 @@ const App = () => {
   // Show loading state while checking auth
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-bg flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -47,10 +47,10 @@ const App = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-foreground dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-bg text-foreground transition-colors duration-300">
       {/* Background Effects */}
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.08),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(129,140,248,0.12),_transparent_55%)]" />
-      
+
       <div className="relative z-10 flex min-h-screen flex-col px-4 pb-10 pt-3 sm:px-6 md:px-10 lg:px-16">
         {/* Header */}
         <header className="mb-6 flex items-center justify-between gap-3">
@@ -110,7 +110,7 @@ const App = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setIsAddFormOpen(true)}
-              className="w-full glass-panel p-4 rounded-xl border border-white/10 hover:border-accent/50 transition-all flex items-center justify-center gap-2 group"
+              className="w-full glass-panel p-4 rounded-xl border border-foreground/10 hover:border-accent/50 transition-all flex items-center justify-center gap-2 group"
             >
               <span className="text-2xl group-hover:scale-110 transition-transform">
                 +
@@ -126,7 +126,7 @@ const App = () => {
 
           {/* Right Column - Info Panel */}
           <aside className="lg:w-80 space-y-4">
-            <div className="glass-panel p-6 rounded-xl border border-white/10">
+            <div className="glass-panel p-6 rounded-xl border border-foreground/10">
               <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -144,7 +144,7 @@ const App = () => {
               </div>
             </div>
 
-            <div className="glass-panel p-6 rounded-xl border border-white/10">
+            <div className="glass-panel p-6 rounded-xl border border-foreground/10">
               <h3 className="text-lg font-semibold mb-2">Tips</h3>
               <p className="text-sm text-muted">
                 Use filters to organize your tasks. Mark tasks as complete to

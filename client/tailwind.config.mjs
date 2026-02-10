@@ -8,17 +8,17 @@ export default {
         sans: ['system-ui', 'ui-sans-serif', 'Inter', 'sans-serif']
       },
       colors: {
-        bg: '#020617',
-        surface: '#020617',
-        surfaceSoft: 'rgba(15,23,42,0.85)',
-        surfaceStrong: '#020617',
-        accent: '#6366f1',
-        accentSoft: 'rgba(99,102,241,0.1)',
-        accentStrong: '#4f46e5',
-        foreground: '#e5e7eb',
-        muted: '#9ca3af',
-        danger: '#f97373',
-        success: '#4ade80'
+        bg: 'rgb(var(--color-bg) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        surfaceSoft: 'rgb(var(--color-surface-soft) / <alpha-value>)',
+        surfaceStrong: 'rgb(var(--color-surface-strong) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        accentSoft: 'rgb(var(--color-accent-soft) / <alpha-value>)',
+        accentStrong: 'rgb(var(--color-accent-strong) / <alpha-value>)',
+        foreground: 'rgb(var(--color-foreground) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        danger: 'rgb(var(--color-danger) / <alpha-value>)',
+        success: 'rgb(var(--color-success) / <alpha-value>)'
       },
       boxShadow: {
         'glass-sm': '0 18px 45px rgba(15,23,42,0.55)',
